@@ -2,6 +2,8 @@ package com.omimi.limitedinput
 
 import android.app.AlertDialog
 import android.content.Intent
+import android.gesture.GestureLibraries
+import android.gesture.GestureLibrary
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -15,12 +17,21 @@ import androidx.navigation.ui.AppBarConfiguration
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.dialog_menu_options.view.*
 
-class MainActivity : AppCompatActivity(), GestureCallback {
+class MainActivity : AppCompatActivity() {
     private lateinit var showBottomNav: MenuItem
     private lateinit var hideBottomNav: MenuItem
     private var bottomNavShown = false
     private lateinit var alertDialog: AlertDialog
     private lateinit var navController: NavController
+    private lateinit var gestureLibrary: GestureLibrary
+
+    private val lGesture = "l_gesture"
+    private val reverseLGesture = "reverse_l_gesture"
+    private val openBottomGesture = "open_bottom_gesture"
+    private val openLeftGesture = "open_left_gesture"
+    private val openRightGesture = "open_right_gesture"
+    private val openTopGesture = "open_top_gesture"
+    private val closedGesture = "closed_gesture"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,10 +43,52 @@ class MainActivity : AppCompatActivity(), GestureCallback {
         //todo add stuff for nav drawer & connecting it to the nav graph? might not matter
 
         setupNavigation()
-
         showTutorial()
 
-        gesture_detector.setGestureCallback(this)
+        gestureLibrary = GestureLibraries.fromRawResource(this, R.raw.gesture)
+
+        //guarantee that it loaded properly
+        if(!gestureLibrary.load()) {
+            finish()
+        }
+
+        gesture_overlay.addOnGesturePerformedListener { overlay, gesture ->
+            var predictions = gestureLibrary.recognize(gesture)
+
+            if(predictions.size > 0 && predictions[0].score > 1.0) {
+                var action = predictions[0].name
+
+                when(action) {
+                    lGesture -> {
+                        openNavDrawer()
+                    }
+
+                    reverseLGesture -> {
+                        showOptionsDialog()
+                    }
+
+                    openRightGesture -> {
+                        showDisplayOneFragment()
+                    }
+
+                    openBottomGesture -> {
+                        showDisplayTwoFragment()
+                    }
+
+                    closedGesture -> {
+                        showDisplayThreeFragment()
+                    }
+
+                    openTopGesture -> {
+                        showDisplayFourFragment()
+                    }
+
+                    openLeftGesture -> {
+                        showDisplayFiveFragment()
+                    }
+                }
+            }
+        }
     }
 
     private fun setupNavigation() {
@@ -101,7 +154,7 @@ class MainActivity : AppCompatActivity(), GestureCallback {
         bottomNavShown = false
     }
 
-    override fun showOptionsDialog() {
+    fun showOptionsDialog() {
         var dialogView = layoutInflater.inflate(R.layout.dialog_menu_options, null)
         var dialogBuilder = AlertDialog.Builder(this)
         dialogBuilder.setTitle("Dropdown Options Menu")
@@ -132,27 +185,27 @@ class MainActivity : AppCompatActivity(), GestureCallback {
         alertDialog.show()
     }
 
-    override fun showDisplayFiveFragment() {
+    private fun showDisplayFiveFragment() {
         navController.navigate(R.id.displayFiveFragment)
     }
 
-    override fun showDisplayFourFragment() {
+    private fun showDisplayFourFragment() {
         navController.navigate(R.id.displayFourFragment)
     }
 
-    override fun showDisplayOneFragment() {
+    private fun showDisplayOneFragment() {
         navController.navigate(R.id.displayOneFragment)
     }
 
-    override fun showDisplayThreeFragment() {
+    private fun showDisplayThreeFragment() {
         navController.navigate(R.id.displayThreeFragment)
     }
 
-    override fun showDisplayTwoFragment() {
+    private fun showDisplayTwoFragment() {
         navController.navigate(R.id.displayTwoFragment)
     }
 
-    override fun openNavDrawer() {
+    private fun openNavDrawer() {
         //todo make this open the nav drawer
     }
 }
