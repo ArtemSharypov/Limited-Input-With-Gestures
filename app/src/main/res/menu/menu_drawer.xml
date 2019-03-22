@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single" android:id="@+id/group1">
+        <item android:title="Drawer 1"/>
+    </group>
+
+    <group android:checkableBehavior="single" android:id="@+id/group2">
+        <item android:title="Drawer 2"/>
+    </group>
+
+    <group android:checkableBehavior="single" android:id="@+id/group3">
+        <item android:title="Drawer 3"/>
+    </group>
+
+    <group android:checkableBehavior="single" android:id="@+id/group4">
+        <item android:title="Drawer 4"/>
+    </group>
+
+    <group android:checkableBehavior="single" android:id="@+id/group5">
+        <item android:title="Drawer 5"/>
+    </group>
+</menu>

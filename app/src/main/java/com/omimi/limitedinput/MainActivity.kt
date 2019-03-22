@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.core.view.GravityCompat
 import androidx.navigation.NavController
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -39,8 +40,6 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         navController = findNavController(this, R.id.nav_host_fragment)
-
-        //todo add stuff for nav drawer & connecting it to the nav graph? might not matter
 
         setupNavigation()
         showTutorial()
@@ -89,6 +88,24 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+
+        nav_view.setNavigationItemSelectedListener {
+            drawer_layout.closeDrawers()
+        true
+        }
+
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp)
+        }
+
+        //hacky fix to make the nav drawer on toolbar stay where its expected when switching fragments
+        navController.addOnDestinationChangedListener { _, _, _ ->
+            supportActionBar?.apply {
+                setDisplayHomeAsUpEnabled(true)
+                setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp)
+            }
+        }
     }
 
     private fun setupNavigation() {
@@ -127,6 +144,11 @@ class MainActivity : AppCompatActivity() {
 
             R.id.show_tutorial -> {
                 showTutorial()
+                true
+            }
+
+            android.R.id.home -> {
+                drawer_layout.openDrawer(GravityCompat.START)
                 true
             }
 
@@ -206,6 +228,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun openNavDrawer() {
-        //todo make this open the nav drawer
+        drawer_layout.openDrawer(GravityCompat.START)
     }
 }
