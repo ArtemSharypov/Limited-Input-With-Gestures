@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="One" android:id="@+id/display_one"/>
+    <item android:title="Two" android:id="@+id/display_two"/>
+    <item android:title="Three" android:id="@+id/display_three"/>
+    <item android:title="Four" android:id="@+id/display_four"/>
+    <item android:title="Five" android:visible="true" android:id="@+id/display_five"/>
+</menu>

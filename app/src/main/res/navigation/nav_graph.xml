@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/nav_graph" app:startDestination="@id/displayOneFragment">
+
+    <fragment android:id="@+id/displayOneFragment" android:name="com.omimi.limitedinput.DisplayOneFragment"
+    />
+    <fragment android:id="@+id/displayFiveFragment" android:name="com.omimi.limitedinput.DisplayFiveFragment"
+    />
+    <fragment android:id="@+id/displayFourFragment" android:name="com.omimi.limitedinput.DisplayFourFragment"
+    />
+    <fragment android:id="@+id/displayThreeFragment" android:name="com.omimi.limitedinput.DisplayThreeFragment"
+    />
+    <fragment android:id="@+id/displayTwoFragment" android:name="com.omimi.limitedinput.DisplayTwoFragment"
+    />
+</navigation>

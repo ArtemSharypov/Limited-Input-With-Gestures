@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Hide Bottom Nav" android:id="@+id/hide_bottom_nav" android:visible="false"/>
+    <item android:title="Show Bottom Nav" android:id="@+id/show_bottom_nav"/>
+    <item android:title="Show Tutorial" android:id="@+id/show_tutorial"/>
+</menu>
