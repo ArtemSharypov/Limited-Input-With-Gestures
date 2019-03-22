@@ -46,7 +46,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:labelVisibilityMode="labeled"
                 app:layout_constraintBottom_toBottomOf="parent" android:id="@+id/bottom_nav_view"
-                app:itemHorizontalTranslationEnabled="false"/>
+                app:itemHorizontalTranslationEnabled="false" android:visibility="gone"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
     <com.google.android.material.navigation.NavigationView
             android:id="@+id/nav_view"
